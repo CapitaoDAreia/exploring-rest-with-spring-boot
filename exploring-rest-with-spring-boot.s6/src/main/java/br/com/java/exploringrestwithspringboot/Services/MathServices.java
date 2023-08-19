@@ -1,12 +1,13 @@
 package br.com.java.exploringrestwithspringboot.Services;
 
+import br.com.java.exploringrestwithspringboot.Exceptions.UnsupportedMathOperationException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class MathServices {
     public Double sum(String numberOne, String numberTwo) throws Exception {
         if(!isNumeric(numberOne) || !isNumeric(numberTwo)){
-            throw new Exception("Invalid number has found");
+            throw new UnsupportedMathOperationException("Invalid number has found");
         }
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }

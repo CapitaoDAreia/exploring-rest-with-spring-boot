@@ -1,4 +1,4 @@
-package br.com.java.exploringrestwithspringboot.s5;
+package br.com.java.exploringrestwithspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
