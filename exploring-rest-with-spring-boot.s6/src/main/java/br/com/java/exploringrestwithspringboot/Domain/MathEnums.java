@@ -2,5 +2,15 @@ package br.com.java.exploringrestwithspringboot.Domain;
 
 public enum MathEnums {
     SUM_RECEIVED,
-    SENDING_SUM_RESULT
+    SENDING_SUM_RESULT,
+    SUB_RECEIVED,
+    SENDING_SUB_RESULT,
+    MUL_RECEIVED,
+    SENDING_MUL_RESULT,
+    MED_RECEIVED,
+    SENDING_MED_RESULT,
+    DIV_RECEIVED,
+    SENDING_DIV_RESULT,
+    SQUARE_ROOT_RECEIVED,
+    SENDING_SQUARE_ROOT_RESULT,
 }
