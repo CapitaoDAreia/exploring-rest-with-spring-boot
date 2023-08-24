@@ -1,7 +1,7 @@
 package br.com.java.exploringrestwithspringboot.Services;
 
 import br.com.java.exploringrestwithspringboot.Exceptions.PersonNotFoundException;
-import br.com.java.exploringrestwithspringboot.Mapper.DozerMapper;
+import br.com.java.exploringrestwithspringboot.Mapper.ModelMapper;
 import br.com.java.exploringrestwithspringboot.Model.Person;
 import br.com.java.exploringrestwithspringboot.v1VO.PersonVO;
 import br.com.java.exploringrestwithspringboot.Repositories.PersonRepository;
@@ -23,7 +23,7 @@ public class PersonServices {
 
         List<Person> entities = this.repository.findAll();
 
-        return DozerMapper.parseListObjects(entities, PersonVO.class);
+        return ModelMapper.parseListObjects(entities, PersonVO.class);
     }
 
     public PersonVO findById(Long ID){
@@ -31,17 +31,17 @@ public class PersonServices {
 
         Person entity = this.repository.findById(ID).orElseThrow(()-> new PersonNotFoundException("No records found for this ID: " + ID));
 
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        return ModelMapper.parseObject(entity, PersonVO.class);
     }
 
     public PersonVO create(PersonVO person){
         logger.info("Creating person | person name: " + person.getFirstName());
 
-        Person entity = DozerMapper.parseObject(person, Person.class);
+        Person entity = ModelMapper.parseObject(person, Person.class);
 
         Person savedEntity = this.repository.save(entity);
 
-        return DozerMapper.parseObject(savedEntity, PersonVO.class);
+        return ModelMapper.parseObject(savedEntity, PersonVO.class);
     }
 
     public PersonVO update(PersonVO person){
@@ -56,7 +56,7 @@ public class PersonServices {
 
         Person savedPerson = this.repository.save(entity);
 
-        return DozerMapper.parseObject(savedPerson, PersonVO.class);
+        return ModelMapper.parseObject(savedPerson, PersonVO.class);
     }
 
     public void delete(Long ID){
