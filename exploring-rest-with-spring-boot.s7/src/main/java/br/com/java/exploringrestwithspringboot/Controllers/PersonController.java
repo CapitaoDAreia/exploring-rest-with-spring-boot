@@ -1,6 +1,6 @@
 package br.com.java.exploringrestwithspringboot.Controllers;
 
-import br.com.java.exploringrestwithspringboot.Model.Person;
+import br.com.java.exploringrestwithspringboot.v1VO.PersonVO;
 import br.com.java.exploringrestwithspringboot.Services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,22 +17,22 @@ public class PersonController {
     private PersonServices service;
 
     @GetMapping(value = "/{ID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById( @PathVariable(value = "ID") Long ID ){
+    public PersonVO findById(@PathVariable(value = "ID") Long ID ){
         return service.findById(ID);
     }
 
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll(){
+    public List<PersonVO> findAll(){
         return service.findAll();
     }
 
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person create( @RequestBody Person person ){
+    public PersonVO create( @RequestBody PersonVO person ){
         return service.create(person);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person update( @RequestBody Person person ){
+    public PersonVO update( @RequestBody PersonVO person ){
         return service.update(person);
     }
 

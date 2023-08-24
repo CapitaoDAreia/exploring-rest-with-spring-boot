@@ -1,4 +1,4 @@
-package br.com.java.exploringrestwithspringboot.s5;
+package br.com.java.exploringrestwithspringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
