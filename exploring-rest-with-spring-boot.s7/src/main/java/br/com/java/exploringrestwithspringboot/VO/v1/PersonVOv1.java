@@ -1,9 +1,9 @@
-package br.com.java.exploringrestwithspringboot.v1VO;
+package br.com.java.exploringrestwithspringboot.VO.v1;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
+public class PersonVOv1 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -24,7 +24,7 @@ public class PersonVO implements Serializable {
 
     private String gender;
 
-    public PersonVO(){}
+    public PersonVOv1(){}
 
     public String getFirstName() {
         return firstName;
@@ -62,7 +62,7 @@ public class PersonVO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonVO person = (PersonVO) o;
+        PersonVOv1 person = (PersonVOv1) o;
         return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
     }
 
