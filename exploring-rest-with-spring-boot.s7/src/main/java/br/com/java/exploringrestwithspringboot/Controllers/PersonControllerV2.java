@@ -16,7 +16,7 @@ public class PersonControllerV2 {
     @Autowired
     private PersonServices service;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonVOv2 createV2(@RequestBody PersonVOv2 person) {
         return service.createV2(person);
     }
