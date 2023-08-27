@@ -1,5 +1,9 @@
 package br.com.java.exploringrestwithspringboot.Services;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import br.com.java.exploringrestwithspringboot.Controllers.PersonController;
 import br.com.java.exploringrestwithspringboot.Exceptions.PersonNotFoundException;
 import br.com.java.exploringrestwithspringboot.Mapper.CustomPersonMapper;
 import br.com.java.exploringrestwithspringboot.Mapper.ModelMapper;
@@ -28,7 +32,17 @@ public class PersonServices {
 
         List<Person> entities = this.repository.findAll();
 
-        return ModelMapper.parseListObjects(entities, PersonVOv1.class);
+        List<PersonVOv1> persons = ModelMapper.parseListObjects(entities, PersonVOv1.class);
+
+        persons
+                .forEach(p -> p.add(
+                        linkTo(
+                                methodOn(PersonController.class).findById(p.getKey())
+                        ).withSelfRel()
+                ));
+
+
+        return persons;
     }
 
     public PersonVOv1 findById(Long ID) {
@@ -36,7 +50,15 @@ public class PersonServices {
 
         Person entity = this.repository.findById(ID).orElseThrow(() -> new PersonNotFoundException("No records found for this ID: " + ID));
 
-        return ModelMapper.parseObject(entity, PersonVOv1.class);
+        PersonVOv1 vo = ModelMapper.parseObject(entity, PersonVOv1.class);
+
+        vo.add(
+                linkTo(
+                        methodOn(PersonController.class).findById(ID)
+                ).withSelfRel()
+        );
+
+        return vo;
     }
 
     public PersonVOv1 create(PersonVOv1 person) {
@@ -46,7 +68,18 @@ public class PersonServices {
 
         Person savedEntity = this.repository.save(entity);
 
-        return ModelMapper.parseObject(savedEntity, PersonVOv1.class);
+        PersonVOv1 vo = ModelMapper.parseObject(savedEntity, PersonVOv1.class);
+
+        //parser is not filling id because savedEntity has an ID and PersonVOv1 has a key
+        vo.setKey(savedEntity.getId());
+
+        vo.add(
+                linkTo(
+                        methodOn(PersonController.class).findById(vo.getKey())
+                ).withSelfRel()
+        );
+
+        return vo;
     }
 
     public PersonVOv2 createV2(PersonVOv2 person) {
@@ -62,7 +95,7 @@ public class PersonServices {
     public PersonVOv1 update(PersonVOv1 person) {
         logger.info("Updating person | person name: " + person.getFirstName());
 
-        Person entity = this.repository.findById(person.getId()).orElseThrow(() -> new PersonNotFoundException("No records found for this ID: " + person.getId()));
+        Person entity = this.repository.findById(person.getKey()).orElseThrow(() -> new PersonNotFoundException("No records found for this ID: " + person.getKey()));
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
@@ -71,7 +104,15 @@ public class PersonServices {
 
         Person savedPerson = this.repository.save(entity);
 
-        return ModelMapper.parseObject(savedPerson, PersonVOv1.class);
+        PersonVOv1 vo = ModelMapper.parseObject(savedPerson, PersonVOv1.class);
+
+        vo.add(
+                linkTo(
+                        methodOn(PersonController.class).findById(vo.getKey())
+                ).withSelfRel()
+        );
+
+        return vo;
     }
 
     public void delete(Long ID) {
