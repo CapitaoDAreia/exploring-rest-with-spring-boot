@@ -52,6 +52,9 @@ public class PersonServices {
 
         PersonVOv1 vo = ModelMapper.parseObject(entity, PersonVOv1.class);
 
+        //parser is not filling id because savedEntity has an ID and PersonVOv1 has a key
+        vo.setKey(entity.getId());
+
         vo.add(
                 linkTo(
                         methodOn(PersonController.class).findById(ID)
