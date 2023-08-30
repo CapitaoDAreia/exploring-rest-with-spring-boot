@@ -23,6 +23,7 @@ public class PersonController {
     @Autowired
     private PersonServices service;
 
+    @CrossOrigin(origins = {"http://localhost:8080"})
     @GetMapping(value = "/{ID}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(summary = "Find a person", description = "Find a person", tags = {"People"}, responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonVOv1.class))}),
@@ -37,6 +38,7 @@ public class PersonController {
         return service.findById(ID);
     }
 
+    @CrossOrigin(origins = {"http://localhost:8080"})
     @GetMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(summary = "Find all people", description = "Find all people", tags = {"People"}, responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = {
@@ -55,6 +57,7 @@ public class PersonController {
         return service.findAll();
     }
 
+    @CrossOrigin(origins = {"http://localhost:8080"})
     @PostMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(summary = "Create one person", description = "Define the request content type choosing between yml, json or xml", tags = {"People"}, responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonVOv1.class))}),
@@ -66,6 +69,7 @@ public class PersonController {
         return service.create(person);
     }
 
+    @CrossOrigin(origins = {"http://localhost:8080"})
     @PutMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(summary = "Update one person", description = "Update one person", tags = {"People"}, responses = {
             @ApiResponse(description = "Updated", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonVOv1.class))}),
@@ -78,6 +82,7 @@ public class PersonController {
         return service.update(person);
     }
 
+    @CrossOrigin(origins = {"http://localhost:8080"})
     @DeleteMapping(value = "/{ID}")
     @Operation(summary = "Delete one person", description = "Delete one person", tags = {"People"}, responses = {
             @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
