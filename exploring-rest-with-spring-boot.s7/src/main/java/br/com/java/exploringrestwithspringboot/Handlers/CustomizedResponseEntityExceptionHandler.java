@@ -1,6 +1,7 @@
 package br.com.java.exploringrestwithspringboot.Handlers;
 
 import br.com.java.exploringrestwithspringboot.Exceptions.ExceptionResponse;
+import br.com.java.exploringrestwithspringboot.Exceptions.InvalidJwtAuthenticationException;
 import br.com.java.exploringrestwithspringboot.Exceptions.PersonNotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
     @ExceptionHandler(PersonNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleNotFoundExceptions(@NotNull Exception exception, @NotNull WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(@NotNull Exception exception, @NotNull WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }
