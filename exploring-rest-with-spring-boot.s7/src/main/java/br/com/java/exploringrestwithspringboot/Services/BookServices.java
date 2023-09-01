@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class BookService {
+public class BookServices {
     private final Logger logger = Logger.getLogger(PersonServices.class.getName());
 
     @Autowired

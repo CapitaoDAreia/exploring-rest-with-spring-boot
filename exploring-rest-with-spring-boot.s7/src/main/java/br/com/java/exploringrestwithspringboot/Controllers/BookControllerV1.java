@@ -1,6 +1,6 @@
 package br.com.java.exploringrestwithspringboot.Controllers;
 
-import br.com.java.exploringrestwithspringboot.Services.BookService;
+import br.com.java.exploringrestwithspringboot.Services.BookServices;
 import br.com.java.exploringrestwithspringboot.Utils.MediaType;
 import br.com.java.exploringrestwithspringboot.VO.v1.BookVOv1;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import java.util.List;
 public class BookControllerV1 {
 
     @Autowired
-    private BookService service;
+    private BookServices service;
 
     @GetMapping(value = "/{ID}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(summary = "Find a book", description = "Find a book", tags = {"Books"}, responses = {

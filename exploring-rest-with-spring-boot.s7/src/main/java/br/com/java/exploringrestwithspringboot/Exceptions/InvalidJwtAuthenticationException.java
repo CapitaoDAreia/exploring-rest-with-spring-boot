@@ -1,9 +1,9 @@
 package br.com.java.exploringrestwithspringboot.Exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.naming.AuthenticationException;
 import java.io.Serial;
 
 @ResponseStatus(HttpStatus.FORBIDDEN)
